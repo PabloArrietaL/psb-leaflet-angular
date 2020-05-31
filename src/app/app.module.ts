@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PsbService } from './services/psb.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PsbService } from './services/psb.service';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [PsbService],
   bootstrap: [AppComponent]
