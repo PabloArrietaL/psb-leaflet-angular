@@ -1,0 +1,37 @@
+<div class="main-container" [class.is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="app-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="app-name">PSB App</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <mat-nav-list>
+
+                <mat-list-item>
+                    Inicio
+                    <mat-icon mat-list-icon>home</mat-icon>
+                </mat-list-item>
+
+                <mat-list-item>
+                    Registrar basurero
+                    <mat-icon mat-list-icon>person_pin_circle</mat-icon>
+                </mat-list-item>
+
+                <mat-list-item>
+                    Iniciar sesión
+                    <mat-icon mat-list-icon>login</mat-icon>
+                </mat-list-item>
+
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <app-map></app-map>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+</div>
