@@ -30,9 +30,7 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/leaflet/dist/leaflet.js",
-              "node_modules/esri-leaflet/dist/esri-leaflet.js",
-              "node_modules/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.js"
+              "node_modules/leaflet/dist/leaflet.js"
             ]
           },
           "configurations": {

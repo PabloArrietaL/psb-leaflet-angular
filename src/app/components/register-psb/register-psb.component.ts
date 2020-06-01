@@ -5,7 +5,6 @@ import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { PSB } from '@data/schemas/psb/psb.interface';
-declare const L: any;
 
 @Component({
   selector: 'app-register-psb',
@@ -38,31 +37,22 @@ export class RegisterPsbComponent implements OnInit {
     const isTablet = this.deviceService.isTablet();
     if (isMobile || isTablet) {
       // tslint:disable-next-line: no-shadowed-variable
-      const position = navigator.geolocation.getCurrentPosition((position: Position) => {
+      const position = navigator.geolocation.getCurrentPosition( (position: Position) => {
         this.formPSB.patchValue({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
         });
-      });
-    }
-    else {
-      this.getCoordinatesFromAddress(address);
-
-    }
-  }
-
-  getCoordinatesFromAddress(address: string) {
-
-    L.esri.Geocoding.geocode({
-      requestParams: {
-        maxLocations: 1
+      },
+      error => {
+        this.formPSB.patchValue({
+          latitude: null,
+          longitude: null
+        });
       }
-    })
-      .text(address)
-      .run( (error, results, response) => {
-        console.log('results:', results);
-      });
+      );
+    }
   }
+
 
   toFormData(formValue: PSB) {
     const formData = new FormData();
