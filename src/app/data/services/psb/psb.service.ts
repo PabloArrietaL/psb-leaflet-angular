@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import * as L from 'leaflet';
 import { PSB } from '@data/schemas/psb/psb.interface';
 import { environment } from '@env/environment';
 
@@ -13,8 +13,16 @@ export class PsbService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<PSB[]> {
-    return this.http.get<Array<PSB>>(this.url);
+  getMarkers(map: L.map): void {
+    this.http.get<Array<PSB>>(`${this.url}psb/`).subscribe(
+      (res: any) => {
+        for (const c of res) {
+          const lat = Number(c.latitude);
+          const lon = Number(c.longitude);
+          const marker = L.marker([lat, lon]).addTo(map);
+        }
+      }
+    );
   }
 
 }

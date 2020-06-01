@@ -15,7 +15,9 @@ export class PSBModel {
             }),
             latitude: new FormControl(''),
             longitude: new FormControl(''),
-            img: new FormControl(null)
+            img: new FormControl(null, {
+                validators: [Validators.required]
+            })
         });
     }
 }
