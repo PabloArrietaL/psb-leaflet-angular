@@ -1,1 +1,41 @@
-<p>register-psb works!</p>
+<div class="title-modal">
+    <h4 class="title-info">Registrar basurero</h4>
+</div>
+
+<form [formGroup]="formPSB" novalidate>
+    <div class="row information">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-12">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Dirección</mat-label>
+                <input matInput formControlName="address" autocomplete="off" required />
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-12">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Barrio</mat-label>
+                <input matInput formControlName="neighborhood" autocomplete="off" required />
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+            <input type="file" class="form-control-file" (change)="fileChange($event)" required />
+        </div>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-2 save">
+            <div class="example-button-row">
+                <button mat-button [mat-dialog-close]="true" class="cancel button-modal">
+                    Cancelar
+                </button>
+                <button mat-raised-button class="acept" [disabled]="formPSB.invalid || showSpinner"
+                    (click)="submit(formPSB)">
+                    <span class="spinner-border spinner-border-sm" *ngIf="showSpinner" role="status"
+                        aria-hidden="true"></span>
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

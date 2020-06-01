@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -11,6 +11,11 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "paths": {
+      "@env/*": ["environments/*"],
+      "@data/*": ["app/data/*"],
+      "@assets/*": ["assets/*"]
+    },
     "lib": [
       "es2018",
       "dom"
