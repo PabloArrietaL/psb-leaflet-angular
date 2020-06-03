@@ -80,8 +80,8 @@ export class RegisterPsbComponent implements AfterViewInit {
     const psb = {
       address: formValue.address,
       neighborhood: formValue.neighborhood,
-      latitude: formValue.latitude,
-      longitude: formValue.longitude
+      latitude: (formValue.latitude).toString(),
+      longitude: (formValue.longitude).toString()
     };
     formData.append('psb', JSON.stringify(psb));
     formData.append('img', formValue.img);
