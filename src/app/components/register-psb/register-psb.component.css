@@ -1,6 +1,34 @@
 .form-field {
-    width: 100%;
-  }
-  .title-info {
-    font-size: larger;
-  }
+  width: 100%;
+}
+
+.title-info {
+  font-size: larger;
+}
+
+.map-section {
+  min-height: 10rem;
+  max-height: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+.map-container {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map-frame {
+  border: 1px solid black;
+  height: 100%;
+  width: 90%;
+}
+
+#map-selection {
+  height: 100%;
+  width: 100%;
+}

@@ -20,9 +20,14 @@ export class PsbService {
           const lat = Number(c.latitude);
           const lon = Number(c.longitude);
           const marker = L.marker([lat, lon]).addTo(map);
+          marker.bindPopup( `<img style="max-height:200px;max-width:200px;" src= ${this.url}psb/image/${c.imageId} />`, {maxWidth: 'auto'});
         }
       }
     );
+  }
+
+  createPSB(data: FormData) {
+    return this.http.post(`${this.url}psb/`, data);
   }
 
 }

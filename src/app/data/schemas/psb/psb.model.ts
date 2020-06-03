@@ -13,8 +13,12 @@ export class PSBModel {
             neighborhood: new FormControl('', {
                 validators: [Validators.required, Validators.nullValidator]
             }),
-            latitude: new FormControl(''),
-            longitude: new FormControl(''),
+            latitude: new FormControl('', {
+                validators: [Validators.required, Validators.nullValidator]
+            }),
+            longitude: new FormControl('', {
+                validators: [Validators.required, Validators.nullValidator]
+            }),
             img: new FormControl(null, {
                 validators: [Validators.required]
             })
