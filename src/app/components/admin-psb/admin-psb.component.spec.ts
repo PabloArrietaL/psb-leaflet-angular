@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegisterPsbComponent } from './register-psb.component';
+import { AdminPsbComponent } from './admin-psb.component';
 
-describe('RegisterPsbComponent', () => {
-  let component: RegisterPsbComponent;
-  let fixture: ComponentFixture<RegisterPsbComponent>;
+describe('AdminPsbComponent', () => {
+  let component: AdminPsbComponent;
+  let fixture: ComponentFixture<AdminPsbComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterPsbComponent ]
+      declarations: [ AdminPsbComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterPsbComponent);
+    fixture = TestBed.createComponent(AdminPsbComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
