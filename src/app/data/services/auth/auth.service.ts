@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from '@data/schemas/auth/auth.interface';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
@@ -18,8 +18,15 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
-    window.location.reload();
+    const headers = {headers: new HttpHeaders({
+      Authorization: this.getToken()
+    })};
+    this.http.get(`${this.URL}logout`, headers).subscribe(
+      _ => {
+        localStorage.clear();
+        window.location.reload();
+      }
+    );
   }
 
   getToken() {
