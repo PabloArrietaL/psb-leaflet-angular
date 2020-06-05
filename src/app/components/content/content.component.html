@@ -11,7 +11,7 @@
             fixedTopGap="56">
             <mat-nav-list>
 
-                <mat-list-item>
+                <mat-list-item (click)="snav.toggle()" [routerLink]="['/']">
                     Inicio
                     <mat-icon mat-list-icon>home</mat-icon>
                 </mat-list-item>
@@ -21,7 +21,7 @@
                     <mat-icon mat-list-icon>person_pin_circle</mat-icon>
                 </mat-list-item>
 
-                <mat-list-item *ngIf="token" [routerLink]="['/admin']" >
+                <mat-list-item *ngIf="token" (click)="snav.toggle()" [routerLink]="['./admin']" >
                     Administrar basureros
                     <mat-icon mat-list-icon>delete</mat-icon>
                 </mat-list-item>
@@ -40,7 +40,7 @@
         </mat-sidenav>
 
         <mat-sidenav-content>
-            <app-map></app-map>
+            <router-outlet></router-outlet>
         </mat-sidenav-content>
 
     </mat-sidenav-container>

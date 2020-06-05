@@ -4,30 +4,32 @@ import { ContentComponent } from './components/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminPsbComponent } from './components/admin-psb/admin-psb.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { MapComponent } from './components/map/map.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    component: ContentComponent
+    component: ContentComponent,
+    children: [
+      {
+        path: '',
+        component: MapComponent
+      },
+      {
+        path: 'admin',
+        canActivate: [AuthGuard],
+        component: AdminPsbComponent
+      },
+    ]
   },
   {
     path: 'login',
     component: LoginComponent
   },
   {
-    path: 'admin',
-    canActivate: [AuthGuard],
-    component: AdminPsbComponent
-  },
-  {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full'
   }
 
