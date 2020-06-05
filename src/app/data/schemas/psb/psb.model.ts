@@ -19,7 +19,7 @@ export class PSBModel {
             longitude: new FormControl('', {
                 validators: [Validators.required, Validators.nullValidator]
             }),
-            img: new FormControl(null, {
+            imageId: new FormControl(null, {
                 validators: [Validators.required]
             })
         });

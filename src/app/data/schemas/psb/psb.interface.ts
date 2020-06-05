@@ -4,5 +4,6 @@ export interface PSB {
     neighborhood: string;
     latitude: string;
     longitude: string;
-    img?: string;
+    CreationDate: Date;
+    imageId?: string;
 }

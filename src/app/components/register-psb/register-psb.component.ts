@@ -84,7 +84,7 @@ export class RegisterPsbComponent implements AfterViewInit {
       longitude: (formValue.longitude).toString()
     };
     formData.append('psb', JSON.stringify(psb));
-    formData.append('img', formValue.img);
+    formData.append('img', formValue.imageId);
     return formData;
   }
 
@@ -92,7 +92,7 @@ export class RegisterPsbComponent implements AfterViewInit {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       this.formPSB.patchValue({
-        img: file
+        imageId: file
       });
       this.cd.markForCheck();
     }

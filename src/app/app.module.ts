@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ToastrModule } from 'ngx-toastr';
@@ -17,6 +17,7 @@ import { ContentComponent } from './components/content/content.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminPsbComponent } from './components/admin-psb/admin-psb.component';
 import { AuthService } from '@data/services/auth/auth.service';
+import { TokenInterceptService } from './core/interceptors/token-intercept.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,16 @@ import { AuthService } from '@data/services/auth/auth.service';
     BrowserAnimationsModule,
     DeviceDetectorModule.forRoot()
   ],
-  providers: [PsbService, AuthService],
+  providers: [
+    PsbService,
+    AuthService,
+    TokenInterceptService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
