@@ -41,7 +41,6 @@ export class PsbService {
 
   deletePSB(id: number) {
     const headers = {headers: new HttpHeaders({
-      'Content-type': 'application/json',
       Authorization: this.auth.getToken()
     })};
     return this.http.delete(`${this.url}admin/${id}`, headers);

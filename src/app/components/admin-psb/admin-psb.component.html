@@ -32,13 +32,13 @@
 									{{p.CreationDate | date: 'short'}}
 								</td>
 								<td>
-									<span *ngIf="p.status == 'V'">Por verificar</span>
-									<span *ngIf="p.status == 'a'">Activo</span>
-									<span *ngIf="p.status == 'i'">Inactivo</span>
+									<span *ngIf="p.status == 'V' || p.status == 'v'">Por verificar</span>
+									<span *ngIf="p.status == 'A' || p.status == 'a'">Activo</span>
+									<span *ngIf="p.status == 'I' || p.status == 'i'">Inactivo</span>
 								</td>
 								<td>
 									<div class="d-flex align-items-center">
-										<button class="btn btn-sm btn-primary mr-1" type="button">
+										<button class="btn btn-sm btn-primary mr-1" type="button" >
 											<i class="fas fa-eye" (click)="openImage(p.ima)"></i></button>
 										<button class="btn btn-sm btn-primary mr-1" type="button">
 											<i class="fas fa-pen" (click)="update(p)"></i></button>

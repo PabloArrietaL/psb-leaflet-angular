@@ -52,6 +52,10 @@ export class ContentComponent implements OnDestroy{
     this.route.navigate(['/login']);
   }
 
+  redirectToAdmin() {
+    this.route.navigate(['/admin']);
+  }
+
   logout() {
     this.auth.logout();
   }
