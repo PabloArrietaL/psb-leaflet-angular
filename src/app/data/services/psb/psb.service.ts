@@ -21,7 +21,10 @@ export class PsbService {
           const lat = Number(c.latitude);
           const lon = Number(c.longitude);
           const marker = L.marker([lat, lon]).addTo(map);
-          marker.bindPopup( `<img style="max-height:4rem;max-width:4rem;" src= ${this.url}psb/image/${c.imageId} />`, {maxWidth: 'auto'});
+          marker.bindPopup( `<img style="max-height:4rem;max-width:4rem;" />`, {maxWidth: 'none'});
+          const popup = marker.getPopup();
+          const setting = popup._content.replace('<img style="max-height:4rem;max-width:4rem;" />', `<img style="max-height:4rem;max-width:4rem;" src= ${this.url}psb/image/${c.imageId} />`);
+          marker.setPopupContent(setting);
         }
       }
     );
