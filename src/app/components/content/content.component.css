@@ -8,6 +8,10 @@
     right: 0;
 }
 
+.mat-toolbar.mat-primary {
+    background: #007bff!important;
+}
+
 .nav-container {
     width: 100%;
     display: flex;

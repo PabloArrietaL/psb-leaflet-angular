@@ -1,31 +1,42 @@
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-5 col-md-7">
-        <div class="card bg-secondary shadow border-0">
-          <div class="card-header bg-transparent text-center">
-            <h2>Bienvenido</h2>
+<div class="container-fluid ">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-light shadow border-0">
+        <div class="card-header bg-primary text-center">
+          <div class="back hvr-wobble-horizontal ">
+            <a routerLink="">
+              <i class="fas fa-arrow-left"></i>
+            </a>
           </div>
-          <div class="card-body px-lg-5 py-lg-5">
-            <form [formGroup]="loginForm" role="form" autocomplete="off" novalidate>
-              <div class="form-group mb-3">
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" placeholder="Usuario" type="text" formControlName="username">
-                </div>
+          <h2>Bienvenido</h2>
+
+          <div class="image-container">
+            <a class="w-100 h-100" routerLink="">
+              <img src="assets/images/logoutb_blanco.png">
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <form [formGroup]="loginForm" role="form" autocomplete="off" novalidate>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <input class="form-control" placeholder="Usuario" type="text" formControlName="username">
               </div>
-              <div class="form-group">
-                <div class="input-group input-group-alternative">
-                  <input class="form-control" placeholder="Contraseña" type="password" formControlName="password">
-                </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <input class="form-control" placeholder="Contraseña" type="password" formControlName="password">
               </div>
-              <div class="text-center">
-                <button type="button" class="btn btn-primary my-4" [disabled]="loginForm.invalid || loading"
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary my-4" [disabled]="loginForm.invalid || loading"
                 (click)="submit(loginForm)">
-                  Iniciar sesión
-                </button>
-              </div>
-            </form>
-          </div>
+                Iniciar sesión
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>
