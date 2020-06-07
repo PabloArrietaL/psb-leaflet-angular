@@ -1,9 +1,19 @@
 <div class="main-container" [class.is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="app-toolbar">
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <h1 class="app-name">PSB App</h1>
+        <div class="nav-container">
+            <div class="toggle-name">
+                <button mat-icon-button (click)="snav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <h1 class="app-name">PSB App</h1>
+            </div>
+            <div class="image-container">
+                <a class="w-100 h-100" routerLink="">
+                    <img src="assets/images/logoutb_blanco.png">
+                </a>
+            </div>
+        </div>
+
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">

@@ -1,5 +1,4 @@
 import { Component, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { PSBModel } from '@data/schemas/psb/psb.model';
 import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -7,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PSB } from '@data/schemas/psb/psb.interface';
 import { PsbService } from '@data/services/psb/psb.service';
 import * as L from 'leaflet';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-register-psb',
@@ -18,13 +18,16 @@ export class RegisterPsbComponent implements AfterViewInit {
   public showSpinner = false;
   private map: any;
   public formPSB: FormGroup = new PSBModel().FormPSB();
+  public device: boolean;
 
   constructor(
-    private deviceService: DeviceDetectorService,
     private dialogRef: MatDialogRef<RegisterPsbComponent>,
     private toastr: ToastrService,
     private cd: ChangeDetectorRef,
-    private service: PsbService) { }
+    private service: PsbService,
+    private deviceService: DeviceDetectorService) {
+      this.setCoordinates();
+    }
 
 
   ngAfterViewInit(): void {
@@ -44,9 +47,13 @@ export class RegisterPsbComponent implements AfterViewInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
     tiles.addTo(this.map);
+    this.markers(false);
+  }
+
+  markers(device: boolean, latitude?: number, longitude?: number) {
     const markers = L.layerGroup([]).addTo(this.map);
     this.map.on('click', (event: any) => {
-      const coords = event.latlng;
+      const coords = device === false ? event.latlng : {lat: latitude, lng: longitude};
       markers.clearLayers();
       const marker = L.marker([coords.lat, coords.lng]).addTo(markers);
       this.formPSB.patchValue({
@@ -54,7 +61,28 @@ export class RegisterPsbComponent implements AfterViewInit {
         longitude: coords.lng
       });
     });
+  }
 
+  setCoordinates() {
+    // this.formPSB.controls.address.value
+    const address = 'Parque Heredia Candil';
+    const isMobile = this.deviceService.isMobile();
+    const isTablet = this.deviceService.isTablet();
+    if ((isMobile || isTablet) && navigator.geolocation) {
+      // tslint:disable-next-line: no-shadowed-variable
+      const position = navigator.geolocation.getCurrentPosition( (position: Position) => {
+        this.device = true;
+        this.markers(true, position.coords.latitude, position.coords.longitude);
+        // this.formPSB.patchValue({
+        //   latitude: position.coords.latitude,
+        //   longitude: position.coords.longitude
+        // });
+      },
+      _ => {
+        this.device = false;
+      }
+      );
+    }
   }
 
 

@@ -18,15 +18,14 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.clear();
     const headers = {headers: new HttpHeaders({
       Authorization: this.getToken()
     })};
     this.http.get(`${this.URL}logout`, headers).subscribe(
-      _ => {
-        localStorage.clear();
-        window.location.reload();
-      }
+      _ => {}
     );
+    window.location.reload();
   }
 
   getToken() {

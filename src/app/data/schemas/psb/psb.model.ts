@@ -21,7 +21,8 @@ export class PSBModel {
             }),
             imageId: new FormControl(null, {
                 validators: [Validators.required]
-            })
+            }),
+            status: new FormControl('')
         });
     }
 }

@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminPsbComponent } from './components/admin-psb/admin-psb.component';
 import { AuthService } from '@data/services/auth/auth.service';
 import { TokenInterceptService } from './core/interceptors/token-intercept.service';
+import { EditPsbComponent } from './components/edit-psb/edit-psb.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TokenInterceptService } from './core/interceptors/token-intercept.servi
     ContentComponent,
     RegisterPsbComponent,
     LoginComponent,
-    AdminPsbComponent
+    AdminPsbComponent,
+    EditPsbComponent
   ],
   imports: [
     HttpClientModule,

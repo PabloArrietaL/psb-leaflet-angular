@@ -8,6 +8,25 @@
     right: 0;
 }
 
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-container {
+    text-align: right;
+}
+
+.toggle-name {
+    align-items: center;
+    display: flex;
+}
+
+img {
+    width: 50%;
+}
+
 .is-mobile .app-toolbar {
     position: fixed;
     z-index: 2;

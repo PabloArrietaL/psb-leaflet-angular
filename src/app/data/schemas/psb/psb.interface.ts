@@ -6,4 +6,5 @@ export interface PSB {
     longitude: string;
     CreationDate: Date;
     imageId?: string;
+    status?: string;
 }

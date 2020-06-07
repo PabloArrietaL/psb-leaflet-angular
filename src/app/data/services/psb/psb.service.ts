@@ -39,7 +39,7 @@ export class PsbService {
     return this.http.get(`${this.url}admin`, headers);
   }
 
-  deletePSB(id: number) {
+  deletePSB(id: string) {
     const headers = {headers: new HttpHeaders({
       Authorization: this.auth.getToken()
     })};
