@@ -51,7 +51,7 @@ export class PsbService {
       'Content-type': 'application/json',
       Authorization: this.auth.getToken()
     })};
-    return this.http.put(`${this.url}admin/${data._id}`, {status: 'a'}, headers);
+    return this.http.put(`${this.url}admin/${data._id}`, {status: data.status}, headers);
   }
 
 }

@@ -17,6 +17,7 @@ export class AdminPsbComponent implements OnInit {
   public psb: Array<PSB> = [];
   public api = environment.api;
   private deviceInfo = null;
+  public showSpinner = true;
 
   constructor(
     private toast: ToastrService,
@@ -37,6 +38,7 @@ export class AdminPsbComponent implements OnInit {
     this.service.getPSB().subscribe(
       (data: Array<PSB>) => {
         this.psb = data;
+        this.showSpinner = false;
       });
   }
 
@@ -56,11 +58,13 @@ export class AdminPsbComponent implements OnInit {
     const dialog = this.dialog.open(EditPsbComponent, dialogConfig);
     dialog.afterClosed().subscribe((result: PSB) => {
       const aux = [];
-      if (!result && result !== undefined) {
-        this.psb.filter((data: PSB) => {
+      if (result && typeof result === 'object') {
+
+        this.psb.forEach( (data: PSB) => {
           if (data._id !== result._id) {
             aux.push(data);
           } else {
+            data.status = result.status;
             aux.push(data);
           }
         });
