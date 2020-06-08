@@ -38,6 +38,13 @@ export class RegisterPsbComponent implements AfterViewInit {
   private initMap(): void {
 
     let marker: any;
+    const Icon = new L.Icon({
+      iconSize: [37, 37],
+      iconAnchor: [19, 27],
+      popupAnchor: [1, -24],
+      iconUrl: 'assets/images/marker.png'
+    });
+
 
     this.map = L.map('map-selection', {
       center: [10.39972, -75.51444],
@@ -54,7 +61,7 @@ export class RegisterPsbComponent implements AfterViewInit {
 
     if (this.isMobile || this.isTablet) {
       this.map.locate({}).on('locationfound', (event: any) => {
-        marker = new L.marker(event.latlng).addTo(this.map);
+        marker = new L.marker(event.latlng, {icon: Icon}).addTo(this.map);
         marker.bindPopup('<p>Posición actual</p>');
         marker.openPopup();
         this.formPSB.patchValue({
