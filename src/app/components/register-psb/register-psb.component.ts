@@ -19,6 +19,8 @@ export class RegisterPsbComponent implements AfterViewInit {
   private map: any;
   public formPSB: FormGroup = new PSBModel().FormPSB();
   public device: boolean;
+  private isMobile = this.deviceService.isMobile();
+  private isTablet = this.deviceService.isTablet();
 
   constructor(
     private dialogRef: MatDialogRef<RegisterPsbComponent>,
@@ -26,8 +28,7 @@ export class RegisterPsbComponent implements AfterViewInit {
     private cd: ChangeDetectorRef,
     private service: PsbService,
     private deviceService: DeviceDetectorService) {
-      this.setCoordinates();
-    }
+  }
 
 
   ngAfterViewInit(): void {
@@ -36,8 +37,10 @@ export class RegisterPsbComponent implements AfterViewInit {
 
   private initMap(): void {
 
+    let marker: any;
+
     this.map = L.map('map-selection', {
-      center: [ 10.39972, -75.51444],
+      center: [10.39972, -75.51444],
       zoom: 12.5
     });
 
@@ -46,45 +49,37 @@ export class RegisterPsbComponent implements AfterViewInit {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
-    tiles.addTo(this.map);
-    this.markers(false);
-  }
 
-  markers(device: boolean, latitude?: number, longitude?: number) {
+    tiles.addTo(this.map);
+
+    if (this.isMobile || this.isTablet) {
+      this.map.locate({}).on('locationfound', (event: any) => {
+        marker = new L.marker(event.latlng).addTo(this.map);
+        marker.bindPopup('<p>Posición actual</p>');
+        marker.openPopup();
+        this.formPSB.patchValue({
+          latitude: event.lat,
+          longitude: event.lng
+        });
+      }).on('locationerror', _ => {
+        if (marker) {
+          this.map.removeLayer(marker);
+          marker = undefined;
+        }
+      });
+    }
+
     const markers = L.layerGroup([]).addTo(this.map);
     this.map.on('click', (event: any) => {
-      const coords = device === false ? event.latlng : {lat: latitude, lng: longitude};
+      const coords = event.latlng;
       markers.clearLayers();
-      const marker = L.marker([coords.lat, coords.lng]).addTo(markers);
+      const newMarker = L.marker([coords.lat, coords.lng]).addTo(markers);
       this.formPSB.patchValue({
         latitude: coords.lat,
         longitude: coords.lng
       });
     });
   }
-
-  setCoordinates() {
-    // this.formPSB.controls.address.value
-    const address = 'Parque Heredia Candil';
-    const isMobile = this.deviceService.isMobile();
-    const isTablet = this.deviceService.isTablet();
-    if ((isMobile || isTablet) && navigator.geolocation) {
-      // tslint:disable-next-line: no-shadowed-variable
-      const position = navigator.geolocation.getCurrentPosition( (position: Position) => {
-        this.device = true;
-        this.markers(true, position.coords.latitude, position.coords.longitude);
-        // this.formPSB.patchValue({
-        //   latitude: position.coords.latitude,
-        //   longitude: position.coords.longitude
-        // });
-      },
-      _ => {
-        this.device = false;
-      }
-      );
-    }
-  }
-
 
   submit(formPSB: FormGroup) {
     if (formPSB.valid) {
