@@ -131,7 +131,9 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://pabloarrietal.github.io/psb-leaflet-angular/"
+          }
         }
       }
     }
